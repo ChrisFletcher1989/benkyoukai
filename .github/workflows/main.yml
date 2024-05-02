@@ -1,8 +1,8 @@
 name: example
 on:
-  push:
-    branches:
-      - '*'
+  pull_request:
+    types: [opened]
+    
 jobs:
   comment:
     runs-on: ubuntu-latest
