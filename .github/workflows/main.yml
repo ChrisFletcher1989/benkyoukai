@@ -16,12 +16,12 @@ jobs:
 
       - name: Add comment to PR
         env:
-          URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          PR_URL=$(jq -r '.pull_request.html_url' "$GITHUB_EVENT_PATH")
           curl \
             -X POST \
-            $URL \
+            $PR_URL/comments \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
             --data '{ "body": "blah blah" }'
