@@ -14,13 +14,8 @@ jobs:
       - name: console log
         run: echo "I have been pushed"
 
-      - name: Add comment to PR
-      - uses: actions/github-script@v6
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+          message: |
+            Hello world ! :wave:
