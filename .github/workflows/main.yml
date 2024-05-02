@@ -6,7 +6,10 @@ on:
 
 jobs:
   comment:
+  
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -15,7 +18,9 @@ jobs:
         run: echo "I have been pushed"
 
       - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v2
+      - uses: mshick/add-pr-comment@v2
         with:
           message: |
-            Hello world ! :wave:
+            **Hello**
+            🌏
+            !
