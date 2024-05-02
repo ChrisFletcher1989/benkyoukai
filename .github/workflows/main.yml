@@ -4,7 +4,7 @@ on:
     branches:
       - '*'
 jobs:
-  echo:
+  comment:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
@@ -15,11 +15,11 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const github = require('@actions/github');
-          const context = github.context;
+          const githubAPI = require('@actions/github');
+          const context = githubAPI.context;
 
           const message = 'Thank you for your PR, we will review it shortly.';
-          const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+          const octokit = githubAPI.getOctokit(process.env.GITHUB_TOKEN);
           const { owner, repo, number } = context.issue;
 
           octokit.issues.createComment({
