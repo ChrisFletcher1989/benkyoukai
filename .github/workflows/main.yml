@@ -1,20 +1,21 @@
 name: example
+
 on:
   pull_request:
     types: [opened]
-    
+
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-    - name: conslole log
-      run: echo "I have been pushed"
+      - name: console log
+        run: echo "I have been pushed"
 
-    - name: Comment on PR
-      run: |
-        MESSAGE="Thank you for your PR, we will review it shortly."
-        URL="https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
-        curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "{\"body\": \"$MESSAGE\"}" $URL
+      - name: Comment on PR
+        run: |
+          MESSAGE="Thank you for your PR, we will review it shortly."
+          URL="https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "{\"body\": \"$MESSAGE\"}" $URL
