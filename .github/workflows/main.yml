@@ -14,9 +14,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: console log
-        run: echo "I have been pushed"
-
       - name: Comment PR
       - uses: mshick/add-pr-comment@v2
         with:
