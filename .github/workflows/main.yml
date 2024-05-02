@@ -10,17 +10,20 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
+    - name: conslole log
+      run: echo "I have been pushed"
+
     - name: Comment on PR
       uses: actions/github-script@v4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const githubAPI = require('@actions/github');
-          const context = githubAPI.context;
+          const githubContext = githubAPI.context;
 
           const message = 'Thank you for your PR, we will review it shortly.';
           const octokit = githubAPI.getOctokit(process.env.GITHUB_TOKEN);
-          const { owner, repo, number } = context.issue;
+          const { owner, repo, number } = githubContext.issue;
 
           octokit.issues.createComment({
             owner: owner,
