@@ -1,0 +1,11 @@
+name: example
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: conslole log
+        run: echo "I have been pushed"
