@@ -10,27 +10,11 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install @actions/github
-
     - name: conslole log
       run: echo "I have been pushed"
 
     - name: Comment on PR
-      uses: actions/github-script@v4
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const githubAPI = require('@actions/github');
-          const githubContext = githubAPI.context;
-
-          const message = 'Thank you for your PR, we will review it shortly.';
-          const octokit = githubAPI.getOctokit(process.env.GITHUB_TOKEN);
-          const { owner, repo, number } = githubContext.issue;
-
-          octokit.issues.createComment({
-            owner: owner,
-            repo: repo,
-            issue_number: number,
-            body: message
-          });
+      run: |
+        MESSAGE="Thank you for your PR, we will review it shortly."
+        URL="https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
+        curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "{\"body\": \"$MESSAGE\"}" $URL
