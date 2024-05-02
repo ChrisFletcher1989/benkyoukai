@@ -10,6 +10,9 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
+    - name: Install dependencies
+      run: npm install @actions/github
+
     - name: conslole log
       run: echo "I have been pushed"
 
