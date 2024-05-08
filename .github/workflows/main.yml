@@ -1,17 +1,17 @@
 name: example
-
 on:
-  pull_request:
-    types: [opened]
-
+  push:
+    branches:
+      - '*'
 jobs:
   comment:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: conslole log
+      run: echo "I have been pushed"
 
       - name: Comment PR
         uses: mshick/add-pr-comment@v2
